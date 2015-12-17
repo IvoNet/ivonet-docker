@@ -6,7 +6,7 @@ This image is almost the same as the original jboss/keycloak-postgres image exce
 
 ## configuration
 
-See also the 
+See also the [documentation](https://docs.jboss.org/keycloak/docs/1.2.0.CR1/userguide/html/server-installation.html#ssl_modes) 
 
 ```bash
 docker run --name ivonet-keycloak --link ivonet-keycloak-postgres:postgres -p 11000:8080 -e POSTGRES_DATABASE=keycloak -e POSTGRES_USER=keycloak -e POSTGRES_PASSWORD="S3cr3t" ivonet/keycloak-postgres

@@ -33,3 +33,7 @@ Now if you start the wildfly instance with somehting like the following command 
 ```bash
 docker run --name ivonet-wildfly -p 8080:8080 -p 9990:9990 -v $(pwd)/artifact:/opt/jboss/wildfly/standalone/deployments/ -d ivonet/wildfly-admin-keycloak-adapter
 ```
+
+
+# Note:
+Right now this image is maintained in another repository under IvoNet and because of backwards compatebility I will leave it there until a new release.
