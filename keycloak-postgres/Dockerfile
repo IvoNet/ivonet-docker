@@ -1,4 +1,4 @@
-FROM jboss/keycloak-postgres:latest
+FROM jboss/keycloak-postgres:2.3.0.Final
 
 MAINTAINER IvoNet <webmaster@ivonet.nl>
 

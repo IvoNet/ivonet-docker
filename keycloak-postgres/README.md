@@ -1,12 +1,12 @@
 # keycloak-postgres image
 
-This image is almost the same as the original jboss/keycloak-postgres image except that it enables https proxying.
-
-
+This image is almost the same as the original jboss/keycloak-postgres image except that it also enables https proxying.
 
 ## configuration
 
 See also the [documentation](https://docs.jboss.org/keycloak/docs/1.2.0.CR1/userguide/html/server-installation.html#ssl_modes) 
+
+## Example
 
 ```bash
 docker run --name ivonet-keycloak --link ivonet-keycloak-postgres:postgres -p 11000:8080 -e POSTGRES_DATABASE=keycloak -e POSTGRES_USER=keycloak -e POSTGRES_PASSWORD="S3cr3t" ivonet/keycloak-postgres
@@ -17,7 +17,7 @@ docker run --name ivonet-keycloak --link ivonet-keycloak-postgres:postgres -p 11
 <VirtualHost *:80>
     ServerName security.example.com
    <Location />
-      RedirectPermanent / https://security.ivonet.it/
+      RedirectPermanent / https://security.example.com/
    </Location>
 </VirtualHost>
 <VirtualHost *:443>
@@ -28,9 +28,9 @@ docker run --name ivonet-keycloak --link ivonet-keycloak-postgres:postgres -p 11
     SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM
     
     # See letsencrypt.org for more information on this part of the config
-    SSLCertificateFile /etc/letsencrypt/live/security.example.com/cert.pem
-    SSLCertificateKeyFile /etc/letsencrypt/live/security.example.com/privkey.pem
-    SSLCertificateChainFile /etc/letsencrypt/live/security.example.com/chain.pem
+    SSLCertificateFile /path/to/cert.pem
+    SSLCertificateKeyFile /path/to/privkey.pem
+    SSLCertificateChainFile /path/to/chain.pem
     
     CustomLog /var/log/apache2/ssl_request_log "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
 
