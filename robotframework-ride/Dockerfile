@@ -12,6 +12,8 @@ MAINTAINER IvoNet <webmaster@ivonet.nl>
 ENV USER_ID=99
 ENV GROUP_ID=100
 
+ENV EDGE="0"
+
 # Gui App Name default is "GUI_APPLICATION"
 ENV APP_NAME="Ride"
 
@@ -76,12 +78,9 @@ RUN pip install wxpython && \
                    requests \
                    rope
 
-
 #########################################
 ##          GUI APP INSTALL            ##
 #########################################
-
-# Install steps for X app
 
 WORKDIR /nobody
 RUN git clone https://github.com/robotframework/RIDE.git /nobody/RIDE && \

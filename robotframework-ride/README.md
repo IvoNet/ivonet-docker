@@ -55,6 +55,14 @@ docker run -it --rm --name "robot" -v $(pwd):/mnt -v $(pwd)/robot:/robot -p 8888
 * command `/sbin/my_init` with start the gui server
 * [Show in browser](http://localhost:8888) (assuming that you run docker native and you ran the gui server)
 
+### Example 3
+
+```
+docker run -d --name="ride" -e EDGE=1 -v $(pwd)/config:/config:rw -v $(pwd)/robot:/robot -p 8080:8080  ivonet/robotframework-ride:latest
+```
+* auto update enabled by setting the EDGE variable to 1 (default 0)
+* named image will remain after stop (you can start it again with `docker start ride`)
+* rest same as example 1
 
 ## ToDo
 
