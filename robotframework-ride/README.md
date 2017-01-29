@@ -1,11 +1,10 @@
-# Robotframework RIDE IDE GUI in a browser
+# Robotframework Ride IDE 
 
 Run the Robotframework Ride IDE X app accessible in a web browser
 
+## Install
 
-## Install (like Ubuntu, Synology 6.0 DSM, etc.):
-
-On other platforms, you can run this docker with the following command:
+On platforms like macOS, Ubuntu Synology 6.0 DSM, etc you can start with a command like:
 
 ```bash
 docker run \
@@ -57,7 +56,7 @@ SERVERIP is mostly localhost on docker native and `docker-machine ip default` if
 
 * map local port to 8080 on vm to get access to the web interface from local machine
 
-## Example(s)
+## Examples
 
 ### Example 1 - Daemon mode Ride IDE in browser
 

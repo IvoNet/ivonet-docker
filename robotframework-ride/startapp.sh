@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-python /usr/local/bin/ride.py
+while true
+do
+   python /usr/local/bin/ride.py
+done
