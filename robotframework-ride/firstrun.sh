@@ -11,8 +11,15 @@ if [ ! "$EDGE" = "1" ]; then
 else
   echo "EDGE requested, updating to latest version"
   cd /nobody/RIDE
-  git pull
-  /usr/bin/python setup.py install
-fi
+  UPSTREAM=${1:-'@{u}'}
+  LOCAL=$(git rev-parse @)
+  REMOTE=$(git rev-parse "$UPSTREAM")
+  BASE=$(git merge-base @ "$UPSTREAM")
 
-/sbin/setuser nobody sh -c /nobody &
+  if [ $LOCAL = $REMOTE ]; then
+      echo "Already Up-to-date"
+  else
+      git pull
+      /usr/bin/python setup.py install
+  fi
+fi

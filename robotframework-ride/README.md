@@ -64,6 +64,16 @@ docker run -d --name="ride" -e EDGE=1 -v $(pwd)/config:/config:rw -v $(pwd)/robo
 * named image will remain after stop (you can start it again with `docker start ride`)
 * rest same as example 1
 
+### Example 4
+
+```
+docker run -it --name="ride" -e EDGE=1 -v $(pwd)/config:/config:rw -v $(pwd)/robot:/robot -p 8080:8080  ivonet/robotframework-ride:latest
+```
+* auto update enabled by setting the EDGE variable to 1 (default 0)
+* named image will remain after stop (you can start it again with `docker start ride`)
+* interactive mode
+* rest same as example 1
+
 ## ToDo
 
 * pip install robotframework-sshlibrary -> Fails to build
