@@ -7,8 +7,23 @@ Run the Robotframework Ride IDE X app accessible in a web browser
 
 On other platforms, you can run this docker with the following command:
 
+```bash
+docker run \
+       -d \
+       --rm \
+       --name="robot" \
+       -e WIDTH="1280" \
+       -e HEIGHT="720" \
+       -v $(pwd)/config:/config:rw \
+       -v $(pwd)/robot:/robot \
+       -p XXXX:8080 \
+        ivonet/robotframework-ride
 ```
-docker run -d --rm --name="robot" -e WIDTH="1280" -e HEIGHT="720" -v $(pwd)/config:/config:rw -v $(pwd)/robot:/robot -p XXXX:8080  ivonet/robotframework-ride
+
+Syntax:
+
+```bash
+docker run [docker options] ivonet/robotframework-ride[:version] [image options]
 ```
 
 ### Setup Instructions
@@ -24,12 +39,37 @@ Or by going to http://SERVERIP:XXXX and selecting Ride in the gui.
 Replace SERVERIP, XXXX with your values. 
 SERVERIP is mostly localhost on docker native and `docker-machine ip default` if still with virtualbox
 
+
+## Commandline Options
+
+### Environment
+
+* `EDGE=[0|1]` -> 0 no auto update, 1 auto update
+* `WIDTH` -> default 1280
+* `HEIGHT` -> default 720
+
+### Volumes
+
+* `/robot` -> map to local folder and safe your testcases here
+* `/config` -> map to local folder if you want the config t survive image updates
+
+### Port
+
+* map local port to 8080 on vm to get access to the web interface from local machine
+
 ## Example(s)
 
 ### Example 1 - Daemon mode Ride IDE in browser
 
-```
-docker run -d --rm --name="ride" -v $(pwd)/config:/config:rw -v $(pwd)/robot:/robot -p 8080:8080  ivonet/robotframework-ride
+```bash
+docker run \ 
+      -d \
+      --rm \
+      --name="ride" \
+      -v $(pwd)/config:/config:rw \
+      -v $(pwd)/robot:/robot \
+      -p 8080:8080 \
+      ivonet/robotframework-ride
 ```
 
 * Runs the Robotframework Ride IDE in deamon mode with the config in the current folder/config and test files in the current folder/robot dir.
@@ -38,11 +78,17 @@ docker run -d --rm --name="ride" -v $(pwd)/config:/config:rw -v $(pwd)/robot:/ro
 * When stopped the named (ride) image is removed. 
 * [Show in browser](http://localhost:8080) (assuming that you run docker native)
 
-
 ### Example 2 - Interactive shell mode
 
-```
-docker run -it --rm --name "robot" -v $(pwd):/mnt -v $(pwd)/robot:/robot -p 8888:8080  ivonet/robotframework-ride /bin/sh
+```bash
+docker run \
+       -it \
+       --rm \
+       --name "robot" \
+       -v $(pwd):/mnt \
+       -v $(pwd)/robot:/robot \
+       -p 8888:8080 \
+        ivonet/robotframework-ride /bin/sh
 ```
 
 * runs in interactive mode 
@@ -57,17 +103,32 @@ docker run -it --rm --name "robot" -v $(pwd):/mnt -v $(pwd)/robot:/robot -p 8888
 
 ### Example 3 - Daemon mode with auto update
 
+```bash
+docker run \
+       -d \
+       --name="ride" \
+       -e EDGE=1 \
+       -v $(pwd)/config:/config:rw \
+       -v $(pwd)/robot:/robot \
+       -p 8080:8080 \
+       ivonet/robotframework-ride:1.0.0
 ```
-docker run -d --name="ride" -e EDGE=1 -v $(pwd)/config:/config:rw -v $(pwd)/robot:/robot -p 8080:8080  ivonet/robotframework-ride:latest
-```
+* runs image version 1.0.0 
 * auto update enabled by setting the EDGE variable to 1 (default 0)
 * named image will remain after stop (you can start it again with `docker start ride`)
 * rest same as example 1
 
 ### Example 4 - Interactive mode with auto update
 
-```
-docker run -it --name="ride" -e EDGE=1 -v $(pwd)/config:/config:rw -v $(pwd)/robot:/robot -p 8080:8080  ivonet/robotframework-ride:latest
+```bash
+docker run \ 
+       -it \
+       --name="ride" \
+       -e EDGE=1 \
+       -v $(pwd)/config:/config:rw \
+       -v $(pwd)/robot:/robot \
+       -p 8080:8080 \
+        ivonet/robotframework-ride:latest
 ```
 * auto update enabled by setting the EDGE variable to 1 (default 0)
 * named image will remain after stop (you can start it again with `docker start ride`)
@@ -76,7 +137,7 @@ docker run -it --name="ride" -e EDGE=1 -v $(pwd)/config:/config:rw -v $(pwd)/rob
 
 ### Example 5 - Run multiple commands in interactive mode
 
-```
+```bash
 docker run \
        -it \
        --rm \
