@@ -26,20 +26,20 @@ SERVERIP is mostly localhost on docker native and `docker-machine ip default` if
 
 ## Example(s)
 
-### Example 1
+### Example 1 - Daemon mode Ride IDE in browser
 
 ```
 docker run -d --rm --name="ride" -v $(pwd)/config:/config:rw -v $(pwd)/robot:/robot -p 8080:8080  ivonet/robotframework-ride
 ```
 
-* Runs the Robotframework Ride IDE in deamon mode with the config in the current folder/config and testfiles in the current folder/robot dir.
+* Runs the Robotframework Ride IDE in deamon mode with the config in the current folder/config and test files in the current folder/robot dir.
 * Runs on port 8080
 * The image is called ride during run phase
 * When stopped the named (ride) image is removed. 
 * [Show in browser](http://localhost:8080) (assuming that you run docker native)
 
 
-### Example 2
+### Example 2 - Interactive shell mode
 
 ```
 docker run -it --rm --name "robot" -v $(pwd):/mnt -v $(pwd)/robot:/robot -p 8888:8080  ivonet/robotframework-ride /bin/sh
@@ -55,7 +55,7 @@ docker run -it --rm --name "robot" -v $(pwd):/mnt -v $(pwd)/robot:/robot -p 8888
 * command `/sbin/my_init` with start the gui server
 * [Show in browser](http://localhost:8888) (assuming that you run docker native and you ran the gui server)
 
-### Example 3
+### Example 3 - Daemon mode with auto update
 
 ```
 docker run -d --name="ride" -e EDGE=1 -v $(pwd)/config:/config:rw -v $(pwd)/robot:/robot -p 8080:8080  ivonet/robotframework-ride:latest
@@ -64,7 +64,7 @@ docker run -d --name="ride" -e EDGE=1 -v $(pwd)/config:/config:rw -v $(pwd)/robo
 * named image will remain after stop (you can start it again with `docker start ride`)
 * rest same as example 1
 
-### Example 4
+### Example 4 - Interactive mode with auto update
 
 ```
 docker run -it --name="ride" -e EDGE=1 -v $(pwd)/config:/config:rw -v $(pwd)/robot:/robot -p 8080:8080  ivonet/robotframework-ride:latest
@@ -74,7 +74,39 @@ docker run -it --name="ride" -e EDGE=1 -v $(pwd)/config:/config:rw -v $(pwd)/rob
 * interactive mode
 * rest same as example 1
 
+### Example 5 - Run multiple commands in interactive mode
+
+```
+docker run \
+       -it \
+       --rm \
+       --name="runbot" \
+       -e EDGE=1 \
+       -v $(pwd)/robot:/robot \
+       ivonet/robotframework-ride \
+       /bin/bash -c "cd;\
+                     git clone --depth=1 https://github.com/robotframework/robotframework.git;\
+                     cd robotframework;\
+                     atest/run.py python --exclude no-ci --exclude jybot_only --exclude require-screenshot --exclude require-tkinter --outputdir /robot atest/robot"  
+```
+* run the ride image in interactive mode
+* remove named image when stopped when stopped
+* auto update
+* map `./robot` to the test folder
+* run the following commands:
+    * `cd` -> goto home dir
+    * `git clone --depth=1 https://github.com/robotframework/robotframework.git` -> Clone the robotframework into the homedir
+    * `cd robotframework` go into the cloned repo
+    *  `atest/run.py python --exclude no-ci --exclude jybot_only --exclude require-screenshot --exclude require-tkinter --outputdir /robot atest/robot` -> run the acceptance tests and report the results to the mapped /robot dir
+* quit after run
+* add `;/bin/sh` to the last command to not exit but enter the shell after run
+
 ## ToDo
 
 * pip install robotframework-sshlibrary -> Fails to build
-* Set the local date time correctly (low prio but still)
+
+
+## Screenshots
+
+<img src="Screenshot_0.png" style="width:75%;height:75%;"/>
+<img src="Screenshot_1.png" style="width:75%;height:75%;"/>
