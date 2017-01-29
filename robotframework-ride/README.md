@@ -55,3 +55,8 @@ docker run -it --rm --name "robot" -v $(pwd):/mnt -v $(pwd)/robot:/robot -p 8888
 * command `/sbin/my_init` with start the gui server
 * [Show in browser](http://localhost:8888) (assuming that you run docker native and you ran the gui server)
 
+
+## ToDo
+
+* pip install robotframework-sshlibrary -> Fails to build
+* Set the local date time correctly (low prio but still)

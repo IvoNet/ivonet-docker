@@ -32,52 +32,50 @@ RUN echo 'deb http://archive.ubuntu.com/ubuntu trusty main universe restricted' 
 
     export DEBCONF_NONINTERACTIVE_SEEN=true DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
-    apt-get install -y ImageMagick && \
-    apt-get install -y build-essential && \
-    apt-get install -y python && \
-    apt-get install -y python-dev && \
-    apt-get install -y python-wxgtk2.8 && \
-    apt-get install -y python-pip && \
-    apt-get install -y python-lxml && \
-    apt-get install -y curl && \
-    apt-get install -y bash && \
-    apt-get install -y firefox && \
-    apt-get install -y git
+    apt-get install -y ImageMagick \
+                       build-essential \
+                       python \
+                       python-dev \
+                       python-wxgtk2.8 \
+                       python-pip \
+                       python-lxml \
+                       curl \
+                       bash \
+                       firefox \
+                       git
 #########################################
 ##          Install app components     ##
 #########################################
 RUN pip install --upgrade pip
 RUN pip install wxpython && \
-    pip install -U robotframework && \
-    pip install -U selenium && \
-    pip install -U robotframework-selenium2library && \
-    pip install -U robotframework-ftplibrary && \
-    pip install -U invoke && \
-    pip install -U docutils && \
-    pip install -U Pygments && \
-    pip install -U pyyaml && \
-    pip install -U robotframework-databaselibrary && \
-    pip install -U robotframework-httplibrary && \
-    pip install -U robotframework-anywherelibrary && \
-    pip install -U https://github.com/bulkan/robotframework-difflibrary/archive/master.zip && \
-    pip install -U robotframework-faker && \
-    pip install -U Paver && \
-    pip install -U robotframework-rfdoc && \
-    pip install -U robotframework-selenium2screenshots && \
-    #pip install robotframework-sshlibrary && \
-    pip install -U robotframework-hub && \
-    pip install -U robotframework-lint && \
-    pip install -U robotframework-pageobjects && \
-    pip install -U robotframework-pycurllibrary && \
-    pip install -U sphinxcontrib-robotframework && \
-    pip install -U jedi && \
-    pip install -U pep8 && \
-    pip install -U pylint && \
-    pip install -U pyflakes && \
-    pip install -U requests && \
-    pip install -U rope
+    pip install -U robotframework \
+                   selenium \
+                   robotframework-selenium2library \
+                   robotframework-ftplibrary \
+                   invoke \
+                   docutils \
+                   Pygments \
+                   pyyaml \
+                   robotframework-databaselibrary \
+                   robotframework-httplibrary \
+                   robotframework-anywherelibrary \
+                   https://github.com/bulkan/robotframework-difflibrary/archive/master.zip \
+                   robotframework-faker \
+                   Paver \
+                   robotframework-rfdoc \
+                   robotframework-selenium2screenshots \
+                   robotframework-hub \
+                   robotframework-lint \
+                   robotframework-pageobjects \
+                   robotframework-pycurllibrary \
+                   sphinxcontrib-robotframework \
+                   jedi \
+                   pep8 \
+                   pylint \
+                   pyflakes \
+                   requests \
+                   rope
 
-RUN echo 'admin ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 #########################################
 ##          GUI APP INSTALL            ##
@@ -87,7 +85,8 @@ RUN echo 'admin ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 WORKDIR /nobody
 RUN git clone https://github.com/robotframework/RIDE.git /nobody/RIDE && \
-    mkdir -p /etc/my_init.d
+    mkdir -p /etc/my_init.d && \
+    echo 'admin ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 WORKDIR /nobody/RIDE
 RUN /usr/bin/python setup.py install
 ADD firstrun.sh /etc/my_init.d/firstrun.sh
