@@ -169,5 +169,11 @@ docker run \
 
 ## Screenshots
 
+### Entre Screen
 <img src="Screenshot_0.png" style="width:75%;height:75%;"/>
+
+### Ride in browser
 <img src="Screenshot_1.png" style="width:75%;height:75%;"/>
+
+### Output of Example 5
+<img src="Screenshot_2.png" style="width:75%;height:75%;"/>
