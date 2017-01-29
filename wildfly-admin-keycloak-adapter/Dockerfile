@@ -2,7 +2,7 @@ FROM ivonet/wildfly-admin
 
 MAINTAINER IvoNet <webmaster@ivonet.nl>
 
-ENV KEYCLOAK_VERSION 1.7.0.Final
+ENV KEYCLOAK_VERSION 2.3.0.Final
 
 WORKDIR /opt/jboss/wildfly
 
