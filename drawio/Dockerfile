@@ -7,7 +7,10 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN cd /var/www/html && git clone --depth=1 https://github.com/jonberenguer/draw.io.git
+RUN cd /opt && \
+    git clone --depth=1 https://github.com/jonberenguer/draw.io.git && \
+    rm -rf /var/www/html && \
+    ln -s /opt/draw.io/war/ /var/www/html
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
