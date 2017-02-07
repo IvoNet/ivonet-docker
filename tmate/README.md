@@ -1,9 +1,10 @@
-tmate-docker
-============
+# tmate-docker
 
-Tmate.io docker server
+Tmate.io docker server.
 
-Run it as a privileged image, as tmate requires some special capabilitites
+Great for doing presentations when you want two screens doing the same thing.
+
+## Usage
 
 If you want to build it:
 ```bash
@@ -15,6 +16,7 @@ If you want to use it, and you build it:
 docker run -d --privileged --rm --name tmate -e HOST=localhost -e PORT=2222 -p 2222:2222 -t ivonet/tmate
 ```
 This will start the docker tmate image in demon mode on your local machine listening on port 2222
+Run it as a privileged image, as tmate requires some special capabilities
 
 To get to connect to this tmate server you need to do 1 other thing
 
@@ -43,6 +45,9 @@ Open two terminals and start tmate in one. It should give a result something lik
 ```bash
 ssh -p2222 Q7EYDeZ4Eu1hSw2FH9xRhzQ6M@localhost
 ```
-if you copy and paste that result into the other terminal you have a 
+If you copy and paste that result into the other terminal you have a 
 terminal mate and you can do your presentations with one terminal 
 on the big screen and one on your laptop.
+
+
+Have fun.
