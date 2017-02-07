@@ -21,22 +21,19 @@ Run it as a privileged image, as tmate requires some special capabilities
 To get to connect to this tmate server you need to do 1 other thing
 
 ```bash
-docker logs tmate
+docker exec tmate cat /.tmate.conf >~/.tmate.conf
 ```
-will result in something like: 
+
+will result in something like a file `~/.tmate.conf` with a content like:
 
 ```text
-Add this to your /root/.tmate.conf file
 set -g tmate-server-host localhost
 set -g tmate-server-port 2222
 set -g tmate-server-rsa-fingerprint "d9:de:f8:b5:98:77:f3:84:a8:c0:c1:00:52:c3:9d:0d"
 set -g tmate-server-ecdsa-fingerprint "60:43:63:6b:c1:7e:0c:52:66:e2:e4:9d:e3:93:c3:04"
-<5> (tmate) Accepting connections on :2222
 ```
 
-Add the lines beginning with `set` to a file called ~/.tmate.conf 
-
-No you have a tmate server running. No don't forget to install a local tmate client.
+Now you have a tmate server running. No don't forget to install a local tmate client.
 
 On a mac with [Homebrew](http://brew.sh) just install with `brew install tmate`
 
@@ -51,3 +48,10 @@ on the big screen and one on your laptop.
 
 
 Have fun.
+
+
+# Trouble shooting
+
+Q: You want to make use of the tmate.io server again.  
+A: just remove the ~/.tmate.conf file
+
