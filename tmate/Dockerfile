@@ -9,7 +9,8 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
         libssh \
         msgpack-c \
         ncurses-libs \
-        libevent
+        libevent \
+        openssh-keygen
 
 ADD backtrace.patch /backtrace.patch
 ADD message.sh /message.sh
@@ -41,7 +42,6 @@ RUN apk add --no-cache --virtual build-dependencies \
     ./configure CFLAGS="-D_GNU_SOURCE" && \
     make -j && \
     cp tmate-slave /bin/tmate-slave && \
-    /bin/sh /tmp/message.sh && \
     apk del build-dependencies && \
     rm -rf /src
 
