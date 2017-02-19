@@ -4,6 +4,7 @@ Tmate.io docker server.
 
 Great for doing presentations when you want two screens doing the same thing.
 
+---
 ## Usage
 
 If you want to use it:
@@ -12,6 +13,8 @@ docker run -d --privileged --rm --name tmate -e HOST=localhost -e PORT=2222 -p 2
 ```
 This will start the docker tmate image in demon mode on your local machine listening on port 2222
 Run it as a privileged image, as tmate requires some special capabilities
+
+---
 
 To get to connect to this tmate server you need to do 1 other thing
 
@@ -30,6 +33,8 @@ set -g tmate-server-ecdsa-fingerprint "60:43:63:6b:c1:7e:0c:52:66:e2:e4:9d:e3:93
 
 ```
 
+---
+
 Now you have a tmate server running. No don't forget to install a local tmate client.
 
 On a mac with [Homebrew](http://brew.sh) just install with `brew install tmate`.
@@ -44,8 +49,7 @@ If you copy and paste that result into the other terminal you have a
 terminal mate and you can do your presentations with one terminal 
 on the big screen and one on your laptop.
 
-
-Have fun.
+---
 
 ## Build
 
@@ -54,8 +58,16 @@ If you want to build it:
 docker build -t ivonet/tmate .
 ```
 
+---
+
 # Trouble shooting
 
 Q: You want to make use of the tmate.io server again.  
 A: just remove the ~/.tmate.conf file
+
+---
+
+Have fun :-)
+
+Ivo
 

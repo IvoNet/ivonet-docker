@@ -61,5 +61,8 @@ RUN ssh-keygen -q -t rsa -N '' -f /root/.ssh/id_rsa && \
     for key in /etc/ssh/ssh_host_*_key.pub; do echo "localhost $(cat ${key})" >> /root/.ssh/known_hosts; done
 VOLUME /sys/fs/cgroup /run/lock /run /tmp
 RUN pip install junit-xml
+RUN pip install ansible
 ENV container=docker
-CMD ["/sbin/init"]
+VOLUME /work
+WORKDIR /work
+CMD ["/bin/bash"]
