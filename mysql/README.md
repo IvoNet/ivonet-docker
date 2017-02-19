@@ -27,3 +27,46 @@ and when done removed.
 My version of the MySql image exposes a `/testdata` folder and that folder is monitored for changes.
 When changes detected it will execute it on the running database.
 You can put testdata sql files there.
+
+## A docker compose example
+
+The `docker-compose.yml` file below exposes two native volumes:
+
+./volumes/setup: Put your setup sql files here. e.g. CREATE statements 
+./volumes/testdata: put your testdata files here. These files will be 'consumed' into the database.
+
+It will also enable a phpmyadmin for further db control...
+
+```text
+version: '2'
+
+services:
+  mysql:
+    image: ivonet/mysql
+    volumes:
+      - ./volumes/setup:/docker-entrypoint-initdb.d
+      - ./volumes/testdata/mysql:/testdata
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+        - MYSQL_ROOT_PASSWORD=secret
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.6.4-1
+    ports:
+      - "8888:80"
+    links:
+      - mysql:mysql
+    environment:
+      - MYSQL_USERNAME=root
+      - MYSQL_ROOT_PASSWORD=secret
+      - PMA_HOST=mysql
+    depends_on:
+      - mysql
+      
+volumes:
+  mysql-data:
+    driver: local
+
+```
