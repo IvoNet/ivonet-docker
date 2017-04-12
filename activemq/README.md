@@ -24,9 +24,8 @@ You can set the memory that you need :
 ```bash
 docker run --name='activemq' -it --rm \
 	-e 'ACTIVEMQ_MIN_MEMORY=512' \
-	-e 'ACTIVEMQ_MAX_MEMORY=2048'\
-        -P
-	vodsquad/activemq
+	-e 'ACTIVEMQ_MAX_MEMORY=2048' \
+    -P ivonet/activemq
 ```
 This sample launch ActiveMQ in docker with 512 MB of memory, and then ActiveMQ can take 2048 MB of max memory
 
@@ -56,8 +55,7 @@ You can launch the image using the docker command line :
 - **For test purpose :**
 
 ```bash
-docker run --name='activemq' -it --rm -P \
-webcenter/activemq:latest
+docker run --name='activemq' -it --rm -P ivonet/activemq
 ```
 The account admin is "admin" and password is "admin". All settings is the default ActiveMQ's settings.
 
@@ -80,7 +78,7 @@ docker run --name='activemq' -d \
 -p 8161:8161 \
 -p 61616:61616 \
 -p 61613:61613 \
-webcenter/activemq:5.14.3
+ivonet/activemq
 ```
 
 
