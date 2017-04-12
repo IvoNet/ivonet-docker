@@ -1,25 +1,3 @@
-# Table of Contents
-- [Introduction](#introduction)
-    - [Version](#version)
-- [Hardware Requirements](#hardware-requirements)
-    - [CPU](#cpu)
-    - [Memory](#memory)
-    - [Storage](#storage)
-- [Contributing](#contributing)
-- [Issues](#issues)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Configuration](#configuration)
-  - [ACCESS](#access)
-  - [QUEUE](#queue)
-  - [TOPIC](#topic)
-  - [Data Store](#data-store)
-  - [BROKER](#broker)
-  - [Disk usage](#disk-usage)
-  - [JMX](#JMX)
-  - [Avaible Configuration Parameters](#avaible-configuration-parameters)
-  - [Advance configuration](#advance-configuration)
-- [References](#references)
 
 # Introduction
 
@@ -34,7 +12,7 @@ Current Version: **5.14.4**
 
 ## CPU
 
-- No stats avaible to say the number of core in function of messages
+- No stats available to say the number of core in function of messages
 
 ## Memory
 
@@ -50,11 +28,11 @@ docker run --name='activemq' -it --rm \
         -P
 	vodsquad/activemq
 ```
-This sample lauch ActiveMQ in docker with 512 MB of memory, and then ACtiveMQ can take 2048 MB of max memory
+This sample launch ActiveMQ in docker with 512 MB of memory, and then ActiveMQ can take 2048 MB of max memory
 
 ## Storage
 
-The necessary hard drive space depends if you use persistant message or not and the type of appender. Normaly, no need space for ActiveMQ because the most data are contains directly on memory.
+The necessary hard drive space depends if you use persistent message or not and the type of appender. Normally, no need space for ActiveMQ because the most data are contains directly on memory.
 I think it depends on how you use ActiveMQ ;)
 
 # Contributing
@@ -63,54 +41,12 @@ If you find this image useful here's how you can help:
 
 - Send a Pull Request with your awesome new features and bug fixes
 
-# Issues
-
-Docker is a relatively new project and is active being developed and tested by a thriving community of developers and testers and every release of docker features many enhancements and bugfixes.
-
-Given the nature of the development and release cycle it is very important that you have the latest version of docker installed because any issue that you encounter might have already been fixed with a newer docker release.
-
-For ubuntu users I suggest [installing docker](https://docs.docker.com/installation/ubuntulinux/) using docker's own package repository since the version of docker packaged in the ubuntu repositories are a little dated.
-
-Here is the shortform of the installation of an updated version of docker on ubuntu.
-
-```bash
-sudo apt-get purge docker.io
-curl -s https://get.docker.io/ubuntu/ | sudo sh
-sudo apt-get update
-sudo apt-get install lxc-docker
-```
-
-Fedora and RHEL/CentOS users should try disabling selinux with `setenforce 0` and check if resolves the issue. If it does than there is not much that I can help you with. You can either stick with selinux disabled (not recommended by redhat) or switch to using ubuntu.
-
-If using the latest docker version and/or disabling selinux does not fix the issue then please file a issue request on the [issues](https://github.com/disaster/activemq/issues) page.
-
-In your issue report please make sure you provide the following information:
-
-- The host distribution and release version.
-- Output of the `docker version` command
-- Output of the `docker info` command
-- The `docker run` command you used to run the image (mask out the sensitive bits).
-
 # Installation
 
 Pull the image from the docker index. This is the recommended method of installation as it is easier to update image. These builds are performed by the **Docker Trusted Build** service.
 
 ```bash
-docker pull webcenter/activemq:5.14.3
-```
-
-You can also pull the `latest` tag which is built from the repository *HEAD*
-
-```bash
-docker pull webcenter/activemq:latest
-```
-
-Alternately you can build the image locally.
-
-```bash
-git clone https://github.com/disaster37/activemq.git
-cd activemq
-docker build --tag="$USER/activemq" .
+docker pull ivonet/activemq
 ```
 
 # Quick Start
@@ -157,29 +93,9 @@ fig up
 
 # Configuration
 
-## ACCESS
 todo
 
-
-## QUEUE
-todo
-
-## TOPIC
-todo
-
-## Data Store
-todo
-
-## BROKER
-todo
-
-## Disk usage
-todo
-
-## JMX
-todo
-
-## Avaible Configuration Parameters
+## Available Configuration Parameters
 
 *Please refer the docker run command options for the `--env-file` flag where you can specify all required environment variables in a single file. This will save you from writing a potentially long docker run command. Alternately you can use fig.*
 
@@ -214,6 +130,33 @@ Below is the complete list of available options that can be used to customize yo
 - **ACTIVEMQ_STATIC_TOPICS**: The list of topics separated by comma witch is created when ActiveMQ start.
 - **ACTIVEMQ_STATIC_QUEUES**: The list of queues separated by comma witch is created when ActiveMQ start.
 
+## docker-compose example
+
+```yaml
+  activemq:
+    image: ivonet/activemq
+    ports:
+    - "8161:8161"
+    - "61616:61616"
+    - "61613:61613"
+    environment:
+    - ACTIVEMQ_MIN_MEMORY=512
+    - ACTIVEMQ_MAX_MEMORY=2048
+    - ACTIVEMQ_ENABLED_AUTH=true
+    - ACTIVEMQ_ADMIN_LOGIN=admin
+    - ACTIVEMQ_ADMIN_PASSWORD=secret
+#    - ACTIVEMQ_REMOVE_DEFAULT_ACCOUNT=true
+#    - ACTIVEMQ_WRITE_LOGIN=producer
+#    - ACTIVEMQ_WRITE_PASSWORD=secret
+#    - ACTIVEMQ_READ_LOGIN=consumer
+#    - ACTIVEMQ_READ_PASSWORD=secret
+#    - ACTIVEMQ_JMX_LOGIN=jmx
+#    - ACTIVEMQ_JMX_PASSWORD=secret
+#    - ACTIVEMQ_USER_LOGIN=user
+#    - ACTIVEMQ_USER_PASSWORD=user
+    volumes:
+    - ./volumes/log/activemq:/var/log/activemq
+```
 
 ## Advance configuration
 
