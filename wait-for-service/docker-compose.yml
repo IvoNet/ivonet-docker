@@ -7,7 +7,7 @@ services:
     expose:
       - "3306"
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: secret
 
   wait-for-service-agent:
     image: ivonet/wait-for-service-agent
