@@ -53,9 +53,16 @@ on the big screen and one on your laptop.
 
 ## Build
 
+### Standard build
 If you want to build it:
 ```bash
 docker build -t ivonet/tmate .
+```
+
+### Arm build (Raspberry Pi & Pi Zero)
+
+```bash
+docker build -f Dockerfile.arm32v6 -t ivonet/arm32v6-tmate .
 ```
 
 ---
