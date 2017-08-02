@@ -17,6 +17,11 @@ RUN apt-get update \
     handbrake-cli \
     mkvtoolnix \
     ffmpeg \
+    mplayer \
+    mencoder \
+    melt \
+    atomicparsley \
+    mp4v2-utils \
     && apt-get clean
 
 CMD ["-h"]

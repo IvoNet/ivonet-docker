@@ -16,6 +16,9 @@ This images contains the following tools:
 * handbrake-cli
 * mkvtoolnix toolset
 * ffmpeg
+* melt
+* mencoder
+* atomicparsley
 
 # Examples
 
@@ -91,17 +94,32 @@ docker run \
    --name mkvmerge \
    -v "$(pwd):/input:ro" \
    -v "$(pwd):/output:rw" \
-   --entrypoint "mkvinfo" \
+   --entrypoint "ffmpeg" \
    ivonet/videotools:latest \
-   /input/output.mkv
+   --help
 ```
 
 * Removes the 'state' when done
 * Maps the current folder to the `input` and `output` volumes of the image
-* make mkvmerge the entrypoint
+* make ffmpeg the entrypoint
 * uses the `ivonet/videotools` images
-* gives mkvmerge the provided options as the parameter.
-    * output file written to output/output.mkv
-    * add audiotrack 2 from origional mkv
-    * process the /input/...mkv file
-* don't forget the add the input and output folderd in your commandline options.
+* asks ffmpeg to print the help
+
+```bash
+docker run \
+   --rm \
+   -it \
+   --name mkvmerge \
+   -v "$(pwd):/input:ro" \
+   -v "$(pwd):/output:rw" \
+   --entrypoint "ffmpeg" \
+   ivonet/videotools:latest \
+   -i /input/bfg.mkv -map 0 -c:a copy -c:s copy -c:v libx264 /output/output.mkv
+```
+
+* Removes the 'state' when done
+* Maps the current folder to the `input` and `output` volumes of the image
+* make ffmpeg the entrypoint
+* uses the `ivonet/videotools` images
+* asks ffmpeg to print the help
+
