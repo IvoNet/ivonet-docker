@@ -10,10 +10,7 @@ fi
 
 echo "Check if folder is empty."
 
-if  [ "$(ls -A ./)" ]; then
-    echo "Starting server..."
-    hexo server
-  else
+if  [ ! "$(ls -A ./)" ]; then
     hexo init /blog
     npm install --save hexo-generator-sitemap
     npm install --save hexo-generator-index
@@ -25,3 +22,5 @@ if  [ "$(ls -A ./)" ]; then
     npm install --save hexo-hey
     echo "Template built."
 fi
+
+exec "$@"

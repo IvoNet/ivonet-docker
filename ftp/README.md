@@ -3,8 +3,29 @@
 
 Pull down with docker:
 
+## Standard image
 ```bash
 docker pull ivonet/ftp
+```
+
+## Arm v7 image (Raspberry Pi)
+
+```bash
+docker pull ivonet/ftp:armv7
+```
+
+## Build
+
+### Standard build
+
+```bash
+docker build -t ivonet/ftp .
+```
+
+### Build Arm v7 (Rpi)
+
+```bash
+docker build -f Dockerfile.armv7 -t ivonet/ftp:armv7 .
 ```
 
 ## Starting it 

@@ -4,6 +4,22 @@
 Dockerfile to build a ActiveMQ container image.
 With base authentication enabled (user: admin / pwd: secret)
 
+## Build
+
+```bash
+docker build -t ivonet/activemq .
+docker push ivonet/activemq
+```
+
+or for arm based architectures
+
+```bash
+docker build -f Dockerfile.arm32v7 -t ivonet/activemq:armv7 .
+docker push ivonet/activemq:armv7
+```
+
+
+
 ## Version
 
 Current Version: **5.14.4**

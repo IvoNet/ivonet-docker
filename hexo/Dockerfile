@@ -12,4 +12,4 @@ ADD entrypoint.sh /entrypoint.sh
 
 EXPOSE 4000
 VOLUME ["/blog", "/scripts"]
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh", "hexo", "server", "-i", "0.0.0.0"]
