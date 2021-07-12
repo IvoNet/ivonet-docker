@@ -9,3 +9,5 @@ This repository contains my IvoNet docker image definitions for automated docker
 Due to new insigts I started to maintain the images I still use in the following repo:
 
 `ivonet-docker-images`
+
+So this repo is not maintained anymore
